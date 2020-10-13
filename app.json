@@ -21,6 +21,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "An e-commerce app",
+    "githubUrl": "https://github.com/hanseltertius/DoneWithIt"
   }
 }
