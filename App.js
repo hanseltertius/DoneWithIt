@@ -11,21 +11,22 @@ export default function App() {
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        alignContent: 'center',
+        flexWrap: 'wrap'
       }}>
       <View
         style={{
           backgroundColor: 'dodgerblue',
           width: 100,
-          height: 300,
-          alignSelf: 'stretch'
+          height: 100,
         }} />
 
       <View
         style={{
           backgroundColor: 'gold',
           width: 100,
-          height: 200
+          height: 100
         }} />
 
       <View
@@ -34,6 +35,23 @@ export default function App() {
           width: 100,
           height: 100
         }} />
+
+      <View
+        style={{
+          backgroundColor: 'grey',
+          width: 100,
+          height: 100
+        }} />
+
+      <View
+        style={{
+          backgroundColor: 'lime',
+          width: 100,
+          height: 100
+        }} />
+
+
+
 
     </View>
   );
