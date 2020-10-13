@@ -4,13 +4,15 @@ import { Image, SafeAreaView, StyleSheet, TouchableWithoutFeedback, Text, View, 
 
 export default function App() {
 
+  const containerStyle = { backgroundColor: 'orange' };
+
   return (
-    <SafeAreaView style={styles.container}>
-      <Button color="orange" title="Click Me" onPress={() => Alert.alert("My title", "My message", [
+    <View style={[styles.container, containerStyle]}>
+      <Button title="Click Me" onPress={() => Alert.alert("My title", "My message", [
         { text: "Yes", onPress: () => console.log("Yes") },
         { text: "No", onPress: () => console.log("No") }
       ])} />
-    </SafeAreaView>
+    </View>
   );
 }
 
