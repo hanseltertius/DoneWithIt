@@ -1,16 +1,18 @@
 import React from 'react';
-import { Image, SafeAreaView, StyleSheet, TouchableWithoutFeedback, Text, View, TouchableOpacity, TouchableHighlight, TouchableNativeFeedback, Button, Alert, Platform, StatusBar } from 'react-native';
+import { SafeAreaView, StyleSheet, View, Platform, StatusBar, Dimensions } from 'react-native';
 
 export default function App() {
 
-  const containerStyle = { backgroundColor: 'orange' };
+  console.log(`Window : ${JSON.stringify(Dimensions.get('window'))}`);
+  console.log(`Screen : ${JSON.stringify(Dimensions.get('screen'))}`);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Button title="Click Me" onPress={() => Alert.alert("My title", "My message", [
-        { text: "Yes", onPress: () => console.log("Yes") },
-        { text: "No", onPress: () => console.log("No") }
-      ])} />
+      <View style={{
+        backgroundColor: 'dodgerblue',
+        width: "50%",
+        height: 70
+      }} />
     </SafeAreaView>
   );
 }
@@ -18,7 +20,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
+    backgroundColor: '#fff'
   },
 });
