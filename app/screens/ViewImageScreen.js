@@ -8,17 +8,13 @@ import colors from '../config/colors';
 export default function ViewImageScreen() {
     return (
         <View style={styles.container}>
-            <MaterialCommunityIcons
-                name="close"
-                size={48}
-                color="white"
-                style={styles.closeIcon} />
+            <View style={styles.closeIcon}>
+                <MaterialCommunityIcons name="close" size={35} color="white" />
+            </View>
 
-            <MaterialCommunityIcons
-                name="trash-can-outline"
-                size={48}
-                color="white"
-                style={styles.deleteIcon} />
+            <View style={styles.deleteIcon}>
+                <MaterialCommunityIcons name="trash-can-outline" size={35} color="white" />
+            </View>
 
             <Image
                 source={require('../assets/chair.jpg')}
@@ -30,8 +26,6 @@ export default function ViewImageScreen() {
 
 const styles = StyleSheet.create({
     closeIcon: {
-        width: 50,
-        height: 50,
         position: 'absolute',
         top: 40,
         left: 30
@@ -42,8 +36,6 @@ const styles = StyleSheet.create({
         paddingTop: StatusBar.currentHeight
     },
     deleteIcon: {
-        width: 50,
-        height: 50,
         position: 'absolute',
         top: 40,
         right: 30

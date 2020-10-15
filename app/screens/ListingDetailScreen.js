@@ -1,73 +1,52 @@
 import React from 'react';
 import { Dimensions, Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import ContactListingText from '../components/ContactListingText';
-import ContactNameText from '../components/ContactNameText';
-import DetailTitleText from '../components/DetailTitleText';
-import PriceText from '../components/PriceText';
+import AppText from '../components/AppText';
+import ListItem from '../components/ListItem';
+
 import colors from '../config/colors';
 
 export default function ListingDetailScreen() {
     return (
         <View style={styles.container}>
 
-            <View style={styles.imageContainer}>
-                <Image
-                    source={require('../assets/jacket.jpg')}
-                    resizeMode='stretch'
-                    style={styles.productImage} />
-            </View>
+            <Image style={styles.image} source={require('../assets/jacket.jpg')} />
 
+            <View style={styles.detailsContainer}>
+                <AppText style={styles.title}>Red jacket for sale</AppText>
+                <AppText style={styles.price}>$100</AppText>
 
-
-            <View style={styles.productInfo}>
-                <DetailTitleText>Red Jacket for sale</DetailTitleText>
-                <PriceText>$100</PriceText>
-            </View>
-
-            <View style={styles.contact}>
-                <Image
-                    source={require('../assets/mosh.jpg')}
-                    resizeMode='contain'
-                    style={{
-                        width: 72,
-                        height: 72,
-                        borderRadius: 100
-                    }} />
-
-                <View style={styles.contactDetail}>
-                    <ContactNameText>Mosh Hamedani</ContactNameText>
-                    <ContactListingText>5 Listings</ContactListingText>
+                <View style={styles.userContainer}>
+                    <ListItem
+                        image={require('../assets/mosh.jpg')}
+                        title="Mosh Hamedani"
+                        subTitle="5 Listings" />
                 </View>
-
             </View>
-
-
         </View>
 
     )
 }
 
 const styles = StyleSheet.create({
-    contact: {
-        margin: 16,
-        flexDirection: 'row'
+    detailsContainer: {
+        padding: 20,
     },
-    contactDetail: {
-        marginLeft: 8
-    },
-    container: {
-        flex: 1,
-    },
-    imageContainer: {
-        flex: 0.5
-    },
-    productImage: {
+    image: {
         width: '100%',
-        height: '100%'
+        height: 300
     },
-    productInfo: {
-        margin: 16
+    price: {
+        color: colors.secondary,
+        fontWeight: 'bold',
+        fontSize: 20,
+        marginVertical: 10
     },
-
+    title: {
+        fontSize: 24,
+        fontWeight: '500'
+    },
+    userContainer: {
+        marginVertical: 50
+    }
 });
 

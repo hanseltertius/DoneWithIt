@@ -1,43 +1,42 @@
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
+
 import colors from '../config/colors';
-import CardItemText from './CardItemText';
-import PriceText from './PriceText';
+import AppText from './AppText';
 
-function Card(props) {
+function Card({ title, subTitle, image }) {
     return (
-        <View style={styles.cardContainer}>
-            <Image
-                source={props.image}
-                resizeMode='cover'
-                style={styles.productImage}
-            />
-            <View style={styles.cardTextContainer}>
-                <CardItemText>{props.title}</CardItemText>
-                <PriceText>{props.subTitle}</PriceText>
+        <View style={styles.card}>
+            <Image source={image} style={styles.image} />
+            <View style={styles.detailsContainer}>
+                <AppText style={styles.title}>{title}</AppText>
+                <AppText style={styles.subTitle}>{subTitle}</AppText>
             </View>
-
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    cardContainer: {
+    card: {
+        borderRadius: 15,
         backgroundColor: colors.white,
-        alignSelf: 'stretch',
-        height: 250,
-        borderRadius: 10,
-        margin: 16
+        marginBottom: 20,
+        overflow: 'hidden',
     },
-    cardTextContainer: {
-        margin: 16
+    detailsContainer: {
+        padding: 20
     },
-    productImage: {
+    image: {
         width: '100%',
-        flex: 1,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10
-    }
+        height: 200
+    },
+    subTitle: {
+        color: colors.secondary,
+        fontWeight: "bold"
+    },
+    title: {
+        marginBottom: 7,
+    },
 });
 
 export default Card;
