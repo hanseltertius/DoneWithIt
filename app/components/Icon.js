@@ -4,26 +4,24 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import colors from '../config/colors';
 
-function Icon({ name, color = "primary" }) {
+function Icon({
+    name,
+    size = 40,
+    backgroundColor = "#000",
+    iconColor = "#fff"
+}) {
     return (
-        <View style={[styles.container, { backgroundColor: colors[color] }]}>
-            <MaterialCommunityIcons
-                name={name}
-                size={24}
-                color='white' />
+        <View style={{
+            width: size,
+            height: size,
+            borderRadius: size / 2,
+            backgroundColor: backgroundColor,
+            justifyContent: 'center',
+            alignItems: 'center'
+        }}>
+            <MaterialCommunityIcons name={name} color={iconColor} size={size * 0.5} />
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        width: 48,
-        height: 48,
-        borderRadius: 24,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginRight: 10
-    }
-})
 
 export default Icon;

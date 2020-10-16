@@ -1,67 +1,77 @@
 import React, { useState } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ListItem from '../components/ListItem';
 import Screen from '../components/Screen';
 import Icon from '../components/Icon';
-import SectionScreen from './SectionScreen';
-
-import colors from '../config/colors';
 import ListItemSeparator from '../components/ListItemSeparator';
 
-const initialStatuses = [
+import colors from '../config/colors';
+
+const menuItems = [
     {
-        id: 1,
         title: "My Listings",
-        image: "format-list-bulleted",
-        color: "primary"
+        icon: {
+            name: "format-list-bulleted",
+            backgroundColor: colors.primary
+        }
     },
     {
-        id: 2,
         title: "My Messages",
-        image: "email",
-        color: "secondary"
+        icon: {
+            name: "email",
+            backgroundColor: colors.secondary
+        }
     }
-]
+];
 
 function MyAccountScreen(props) {
 
-    const [statuses, setStatuses] = useState(initialStatuses);
-
     return (
-        <Screen>
-            <SectionScreen>
-                <ListItem
-                    image={require('../assets/mosh.jpg')}
-                    title="Mosh Hamedani"
-                    subTitle="5 Listings" />
-            </SectionScreen>
+        <Screen style={styles.screen} >
 
-            <SectionScreen>
+            <View style={styles.container}>
+                <ListItem
+                    title="Mosh Hamedani"
+                    subTitle="programmingwithmosh@gmail.com"
+                    image={require('../assets/mosh.jpg')}
+                />
+            </View>
+
+            <View style={styles.container}>
                 <FlatList
-                    data={statuses}
-                    keyExtractor={status => status.id.toString()}
+                    data={menuItems}
+                    keyExtractor={menuItem => menuItem.title}
+                    ItemSeparatorComponent={ListItemSeparator}
                     renderItem={({ item }) =>
                         <ListItem
                             title={item.title}
-                            image={item.image}
-                            color={item.color} />}
-                    ItemSeparatorComponent={ListItemSeparator} />
-            </SectionScreen>
+                            IconComponent={
+                                <Icon
+                                    name={item.icon.name}
+                                    backgroundColor={item.icon.backgroundColor}
+                                />
+                            }
+                        />
+                    }
+                />
+            </View>
 
-            <SectionScreen>
-                <ListItem
-                    image="logout"
-                    title="Log Out"
-                    color="yellow" />
-            </SectionScreen>
+            <ListItem
+                title="Log Out"
+                IconComponent={<Icon name="logout" backgroundColor="#ffe66d" />}
+            />
+
         </Screen>
     );
 }
 
 const styles = StyleSheet.create({
-    sectionContainer: {
-        marginVertical: 16
+    container: {
+        marginVertical: 20
+    },
+    screen: {
+        backgroundColor: colors.light
     }
 })
 

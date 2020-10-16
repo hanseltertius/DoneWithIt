@@ -12,6 +12,6 @@ import MyAccountScreen from './app/screens/MyAccountScreen';
 
 export default function App() {
   return (
-    <MyAccountScreen />
+    <ListingsScreen />
   );
 }
