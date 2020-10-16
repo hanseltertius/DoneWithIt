@@ -4,6 +4,7 @@ import Constants from 'expo-constants';
 
 import Screen from '../components/Screen';
 import ListItem from '../components/ListItem';
+import ListItemSeparator from '../components/ListItemSeparator';
 
 const messages = [
     {
@@ -30,7 +31,8 @@ function MessagesScreen(props) {
                     <ListItem
                         title={item.title}
                         subTitle={item.description}
-                        image={item.image} />} />
+                        image={item.image} />}
+                ItemSeparatorComponent={ListItemSeparator} />
         </Screen>
 
     );
