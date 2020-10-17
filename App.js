@@ -12,6 +12,7 @@ import MyAccountScreen from './app/screens/MyAccountScreen';
 import { Switch, Text, TextInput } from 'react-native';
 import Screen from './app/components/Screen';
 import AppTextInput from './app/components/AppTextInput';
+import AppPicker from './app/components/AppPicker';
 
 export default function App() {
 
@@ -19,9 +20,8 @@ export default function App() {
 
   return (
     <Screen>
-      <Switch
-        value={isNew}
-        onValueChange={(newValue) => setIsNew(newValue)} />
+      <AppPicker icon="apps" placeholder="Category" />
+      <AppTextInput icon="email" placeholder="Email" />
     </Screen>
   );
 }
