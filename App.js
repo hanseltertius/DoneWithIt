@@ -9,17 +9,19 @@ import ListItemScreen from './app/screens/ListItemScreen';
 import MessagesScreen from './app/screens/MessagesScreen';
 import ListingsScreen from './app/screens/ListingsScreen';
 import MyAccountScreen from './app/screens/MyAccountScreen';
-import { Text, TextInput } from 'react-native';
+import { Switch, Text, TextInput } from 'react-native';
 import Screen from './app/components/Screen';
 import AppTextInput from './app/components/AppTextInput';
 
 export default function App() {
 
-  const [firstName, setFirstName] = useState('');
+  const [isNew, setIsNew] = useState(false);
 
   return (
     <Screen>
-      <AppTextInput icon="email" placeholder="Username" />
+      <Switch
+        value={isNew}
+        onValueChange={(newValue) => setIsNew(newValue)} />
     </Screen>
   );
 }
