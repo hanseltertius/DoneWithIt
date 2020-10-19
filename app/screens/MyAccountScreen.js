@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import ListItem from '../components/ListItem';
+
 import Screen from '../components/Screen';
 import Icon from '../components/Icon';
-import ListItemSeparator from '../components/ListItemSeparator';
+import { ListItem, ListItemSeparator } from '../components/lists';
 
 import colors from '../config/colors';
 
