@@ -1,17 +1,17 @@
-import { useFormikContext } from 'formik';
 import React from 'react';
+import { useFormikContext } from 'formik';
+
 import AppPicker from '../AppPicker';
 import ErrorMessage from './ErrorMessage';
 
-function AppFormPicker({ name, ...otherProps }) {
-
-    const { setFieldValue, setFieldTouched, errors, touched, values } = useFormikContext();
+function AppFormPicker({ items, name, placeholder }) {
+    const { errors, setFieldValue, touched, values } = useFormikContext();
 
     return (
         <>
             <AppPicker
-                {...otherProps}
-                onPress={() => setFieldTouched(name)}
+                items={items}
+                placeholder={placeholder}
                 selectedItem={values[name]}
                 onSelectItem={item => setFieldValue(name, item)} />
 

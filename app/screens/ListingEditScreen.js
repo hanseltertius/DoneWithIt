@@ -2,14 +2,20 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import * as Yup from 'yup';
 
-import { AppForm, AppFormField, SubmitButton } from '../components/form';
+import {
+    AppForm as Form,
+    AppFormField as FormField,
+    AppFormPicker as Picker,
+    SubmitButton
+} from '../components/form';
 import AppFormPicker from '../components/form/AppFormPicker';
 import Screen from '../components/Screen';
 
 const validationSchema = Yup.object().shape({
     title: Yup.string().required().min(1).label("Title"),
-    price: Yup.number().required().moreThan(1).lessThan(10000).label("Price"),
-    category: Yup.object().required().label("Category")
+    price: Yup.number().required().min(1).max(10000).label("Price"),
+    category: Yup.object().required().nullable().label("Category"),
+    description: Yup.string().label("Description")
 })
 
 const categories = [
@@ -22,35 +28,36 @@ function ListingEditScreen(props) {
     return (
         <Screen style={styles.container}>
 
-            <AppForm
-                initialValues={{ title: '', price: '', category: '', description: '' }}
+            <Form
+                initialValues={{ title: '', price: '', category: null, description: '' }}
                 onSubmit={values => console.log(values)}
                 validationSchema={validationSchema}>
 
-                <AppFormField
-                    autoCorrect={false}
+                <FormField
+                    maxLength={255}
                     name="title"
                     placeholder="Title" />
 
-                <AppFormField
-                    autoCapitalize="none"
-                    autoCorrect={false}
+                <FormField
+                    maxLength={8}
                     name="price"
                     keyboardType="numeric"
                     placeholder="Price" />
 
-                <AppFormPicker
+                <Picker
                     items={categories}
                     name="category"
                     placeholder="Category" />
 
-                <AppFormField
-                    autoCorrect={false}
+                <FormField
+                    maxLength={255}
+                    multiline
                     name="description"
+                    numberOfLines={3}
                     placeholder="Description" />
 
                 <SubmitButton title="Post" />
-            </AppForm>
+            </Form>
         </Screen>
     );
 }
