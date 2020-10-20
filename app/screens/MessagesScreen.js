@@ -33,12 +33,14 @@ function MessagesScreen(props) {
         <Screen>
             <FlatList
                 data={messages}
+                style={{ flex: 1 }}
                 keyExtractor={message => message.id.toString()}
                 renderItem={({ item }) =>
                     <ListItem
                         title={item.title}
                         subTitle={item.description}
                         image={item.image}
+                        showChevrons
                         onPress={() => console.log("Message selected", item)}
                         renderRightActions={() => (
                             <ListItemDeleteAction onPress={() => handleDelete(item)} />

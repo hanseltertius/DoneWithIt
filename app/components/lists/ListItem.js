@@ -1,24 +1,31 @@
 import React from 'react';
 import { Image, ImageComponent, StyleSheet, TouchableHighlight, View } from 'react-native';
-import AppText from '../AppText';
-
-import colors from '../../config/colors';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+import AppText from '../AppText';
+import defaultStyles from '../../config/styles';
 import Icon from '../Icon';
 
-function ListItem({ title, subTitle, image, IconComponent, onPress, renderRightActions }) {
+function ListItem({ title, subTitle, image, IconComponent, onPress, renderRightActions, showChevrons }) {
     return (
         <Swipeable renderRightActions={renderRightActions}>
             <TouchableHighlight
-                underlayColor={colors.light}
+                underlayColor={defaultStyles.colors.light}
                 onPress={onPress}>
                 <View style={styles.container}>
                     {IconComponent}
                     {image && <Image source={image} style={styles.image} />}
                     <View style={styles.detailsContainer}>
-                        <AppText style={styles.title}>{title}</AppText>
-                        {subTitle && <AppText style={styles.subTitle}>{subTitle}</AppText>}
+                        <AppText style={styles.title} numberOfLines={2}>{title}</AppText>
+                        {subTitle && <AppText style={styles.subTitle} numberOfLines={1}>{subTitle}</AppText>}
                     </View>
+                    {showChevrons &&
+                        <MaterialCommunityIcons
+                            name="chevron-right"
+                            size={24}
+                            color={defaultStyles.colors.medium}
+                        />}
                 </View>
             </TouchableHighlight>
         </Swipeable>
@@ -29,11 +36,13 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         padding: 15,
-        backgroundColor: colors.white
+        backgroundColor: defaultStyles.colors.white,
+        alignItems: 'center'
     },
     detailsContainer: {
         marginLeft: 10,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        flex: 1
     },
     image: {
         width: 70,
@@ -41,7 +50,7 @@ const styles = StyleSheet.create({
         borderRadius: 35
     },
     subTitle: {
-        color: colors.medium
+        color: defaultStyles.colors.medium
     },
     title: {
         fontWeight: '500'

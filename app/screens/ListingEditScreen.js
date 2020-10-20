@@ -19,9 +19,15 @@ const validationSchema = Yup.object().shape({
 })
 
 const categories = [
-    { label: "Furniture", value: 1 },
-    { label: "Clothing", value: 2 },
-    { label: "Cameras", value: 3 }
+    { backgroundColor: "#fc5c65", name: "floor-lamp", label: "Furniture", value: 1 },
+    { backgroundColor: "#fd9644", name: "car", label: "Cars", value: 2 },
+    { backgroundColor: "#fed330", name: "camera", label: "Cameras", value: 3 },
+    { backgroundColor: "#26de81", name: "cards", label: "Games", value: 4 },
+    { backgroundColor: "#2bcbba", name: "shoe-heel", label: "Clothing", value: 5 },
+    { backgroundColor: "#45aaf2", name: "basketball", label: "Sports", value: 6 },
+    { backgroundColor: "#4b7bec", name: "headphones", label: "Movies & Music", value: 7 },
+    { backgroundColor: "#9b66e2", name: "book-open-variant", label: "Books", value: 8 },
+    { backgroundColor: "#7b8ca1", name: "application", label: "Other", value: 9 }
 ];
 
 function ListingEditScreen(props) {
@@ -42,12 +48,14 @@ function ListingEditScreen(props) {
                     maxLength={8}
                     name="price"
                     keyboardType="numeric"
-                    placeholder="Price" />
+                    placeholder="Price"
+                    width="30%" />
 
                 <Picker
                     items={categories}
                     name="category"
-                    placeholder="Category" />
+                    placeholder="Category"
+                    width="50%" />
 
                 <FormField
                     maxLength={255}

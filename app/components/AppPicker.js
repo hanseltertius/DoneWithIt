@@ -5,15 +5,16 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AppText from './AppText';
 import Screen from './Screen';
 import defaultStyles from '../config/styles';
-import PickerItem from './PickerItem';
+import CategoryPickerItem from './CategoryPickerItem';
+import Icon from './Icon';
 
-function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
+function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem, width }) {
     const [modalVisible, setModalVisible] = useState(false);
 
     return (
         <>
             <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-                <View style={styles.container}>
+                <View style={[styles.container, { width }]}>
                     {icon && (
                         <MaterialCommunityIcons
                             name={icon}
@@ -38,9 +39,16 @@ function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
                     <Button title="Close" onPress={() => setModalVisible(false)} />
                     <FlatList
                         data={items}
+                        numColumns={3}
                         keyExtractor={item => item.value.toString()}
                         renderItem={({ item }) =>
-                            <PickerItem
+                            <CategoryPickerItem
+                                IconComponent={
+                                    <Icon
+                                        name={item.name}
+                                        size={72}
+                                        backgroundColor={item.backgroundColor} />
+                                }
                                 label={item.label}
                                 onPress={() => {
                                     setModalVisible(false);
