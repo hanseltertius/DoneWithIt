@@ -3,7 +3,7 @@ import { Image, ImageComponent, StyleSheet, TouchableHighlight, View } from 'rea
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import AppText from '../AppText';
+import AppText from '../Text';
 import defaultStyles from '../../config/styles';
 import Icon from '../Icon';
 
@@ -17,13 +17,13 @@ function ListItem({ title, subTitle, image, IconComponent, onPress, renderRightA
                     {IconComponent}
                     {image && <Image source={image} style={styles.image} />}
                     <View style={styles.detailsContainer}>
-                        <AppText style={styles.title} numberOfLines={2}>{title}</AppText>
-                        {subTitle && <AppText style={styles.subTitle} numberOfLines={1}>{subTitle}</AppText>}
+                        <AppText style={styles.title} numberOfLines={1}>{title}</AppText>
+                        {subTitle && <AppText style={styles.subTitle} numberOfLines={2}>{subTitle}</AppText>}
                     </View>
                     {showChevrons &&
                         <MaterialCommunityIcons
                             name="chevron-right"
-                            size={24}
+                            size={25}
                             color={defaultStyles.colors.medium}
                         />}
                 </View>

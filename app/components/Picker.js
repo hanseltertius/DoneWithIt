@@ -2,13 +2,23 @@ import React, { useState } from 'react';
 import { Button, FlatList, Modal, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import AppText from './AppText';
+import AppText from './Text';
 import Screen from './Screen';
 import defaultStyles from '../config/styles';
 import CategoryPickerItem from './CategoryPickerItem';
 import Icon from './Icon';
+import PickerItem from './PickerItem';
 
-function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem, width }) {
+function AppPicker({
+    icon,
+    items,
+    numberOfColumns = 1,
+    onSelectItem,
+    PickerItemComponent = PickerItem,
+    placeholder,
+    selectedItem,
+    width = "100%"
+}) {
     const [modalVisible, setModalVisible] = useState(false);
 
     return (
@@ -39,16 +49,11 @@ function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem, width
                     <Button title="Close" onPress={() => setModalVisible(false)} />
                     <FlatList
                         data={items}
-                        numColumns={3}
+                        numColumns={numberOfColumns}
                         keyExtractor={item => item.value.toString()}
                         renderItem={({ item }) =>
-                            <CategoryPickerItem
-                                IconComponent={
-                                    <Icon
-                                        name={item.name}
-                                        size={72}
-                                        backgroundColor={item.backgroundColor} />
-                                }
+                            <PickerItemComponent
+                                item={item}
                                 label={item.label}
                                 onPress={() => {
                                     setModalVisible(false);
@@ -68,7 +73,6 @@ const styles = StyleSheet.create({
         backgroundColor: defaultStyles.colors.light,
         borderRadius: 25,
         flexDirection: 'row',
-        width: '100%',
         padding: 15,
         marginVertical: 10
     },

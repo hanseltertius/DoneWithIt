@@ -1,29 +1,30 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 
-import AppText from './AppText';
+import AppText from './Text';
 import Icon from './Icon';
 import defaultStyles from '../config/styles';
 
 // todo : ganti nama jadi category picker item
-function CategoryPickerItem({ IconComponent, label, onPress }) {
+function CategoryPickerItem({ item, label, onPress }) {
     return (
         <TouchableOpacity onPress={onPress} style={styles.container}>
-            {IconComponent}
-            <AppText style={styles.text}>{label}</AppText>
+            <Icon backgroundColor={item.backgroundColor} name={item.name} size={80} />
+            <AppText style={styles.label}>{item.label}</AppText>
         </TouchableOpacity>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: 'center',
-        padding: 20
+        paddingHorizontal: 30,
+        paddingVertical: 15,
+        width: '33%'
     },
-    text: {
+    label: {
         textAlign: 'center',
-        marginTop: 8
+        marginTop: 5
     }
 })
 

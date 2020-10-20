@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import AppText from './app/components/AppText';
+import AppText from './app/components/Text';
 import ViewImageScreen from './app/screens/ViewImageScreen';
 import ListingDetailScreen from './app/screens/ListingDetailScreen';
 import WelcomeScreen from './app/screens/WelcomeScreen';
@@ -11,8 +11,8 @@ import ListingsScreen from './app/screens/ListingsScreen';
 import MyAccountScreen from './app/screens/MyAccountScreen';
 import { Switch, Text, TextInput } from 'react-native';
 import Screen from './app/components/Screen';
-import AppTextInput from './app/components/AppTextInput';
-import AppPicker from './app/components/AppPicker';
+import AppTextInput from './app/components/TextInput';
+import AppPicker from './app/components/Picker';
 import LoginScreen from './app/screens/LoginScreen';
 import RegisterScreen from './app/screens/RegisterScreen';
 import ListingEditScreen from './app/screens/ListingEditScreen';

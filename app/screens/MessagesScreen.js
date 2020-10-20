@@ -33,7 +33,6 @@ function MessagesScreen(props) {
         <Screen>
             <FlatList
                 data={messages}
-                style={{ flex: 1 }}
                 keyExtractor={message => message.id.toString()}
                 renderItem={({ item }) =>
                     <ListItem
