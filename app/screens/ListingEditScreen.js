@@ -1,22 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import * as Yup from 'yup';
-import CategoryPickerItem from '../components/CategoryPickerItem';
+import * as Location from 'expo-location';
 
+import CategoryPickerItem from '../components/CategoryPickerItem';
 import {
     AppForm as Form,
     AppFormField as FormField,
     AppFormPicker as Picker,
+    AppFormImagePicker as FormImagePicker,
     SubmitButton
 } from '../components/form';
-import AppFormPicker from '../components/form/FormPicker';
 import Screen from '../components/Screen';
 
 const validationSchema = Yup.object().shape({
+    images: Yup.array().required().label("Images"),
     title: Yup.string().required().min(1).label("Title"),
     price: Yup.number().required().min(1).max(10000).label("Price"),
     category: Yup.object().required().nullable().label("Category"),
-    description: Yup.string().label("Description")
+    description: Yup.string().label("Description"),
+    location: Yup.object().label("Location")
 })
 
 const categories = [
@@ -32,13 +35,30 @@ const categories = [
 ];
 
 function ListingEditScreen(props) {
+
+    const [location, setLocation] = useState();
+
+    const requestPermission = async () => {
+        const { granted } = await Location.requestPermissionsAsync();
+        if (granted) {
+            const location = await Location.getCurrentPositionAsync();
+            setLocation(location);
+        }
+    }
+
+    useEffect(() => {
+        requestPermission();
+    }, []);
+
     return (
         <Screen style={styles.container}>
 
             <Form
-                initialValues={{ title: '', price: '', category: null, description: '' }}
+                initialValues={{ images: [], title: '', price: '', category: null, description: '' }}
                 onSubmit={values => console.log(values)}
                 validationSchema={validationSchema}>
+
+                <FormImagePicker name="images" />
 
                 <FormField
                     maxLength={255}

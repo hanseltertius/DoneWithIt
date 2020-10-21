@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
+import { Button, Image, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import Screen from './app/components/Screen';
-import { Button, Image } from 'react-native';
+import defaultStyles from './app/config/styles';
+import ListingEditScreen from './app/screens/ListingEditScreen';
 
 export default function App() {
 
-  const [imageUri, setImageUri] = useState();
+  const [imageUris, setImageUris] = useState([]);
 
   const requestPermission = async () => {
 
@@ -32,9 +35,22 @@ export default function App() {
   }
 
   return (
-    <Screen>
-      <Button title="Select Image" onPress={selectImage} />
-      <Image source={{ uri: imageUri }} style={{ width: 200, height: 200 }} />
-    </Screen>
+    <ListingEditScreen />
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    width: 96,
+    height: 96,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 15,
+    backgroundColor: defaultStyles.colors.light
+  },
+  image: {
+    width: 96,
+    height: 96,
+    borderRadius: 15
+  }
+})

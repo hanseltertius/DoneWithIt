@@ -5,7 +5,6 @@ import AppText from './Text';
 import Icon from './Icon';
 import defaultStyles from '../config/styles';
 
-// todo : ganti nama jadi category picker item
 function CategoryPickerItem({ item, label, onPress }) {
     return (
         <TouchableOpacity onPress={onPress} style={styles.container}>
