@@ -1,34 +1,20 @@
-import React, { useState } from 'react';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import AppText from './app/components/Text';
-import ViewImageScreen from './app/screens/ViewImageScreen';
-import ListingDetailScreen from './app/screens/ListingDetailScreen';
-import WelcomeScreen from './app/screens/WelcomeScreen';
+import React, { useEffect, useState } from 'react';
+import * as ImagePicker from 'expo-image-picker';
 
-import Card from './app/components/Card';
-import MessagesScreen from './app/screens/MessagesScreen';
-import ListingsScreen from './app/screens/ListingsScreen';
-import MyAccountScreen from './app/screens/MyAccountScreen';
-import { Switch, Text, TextInput } from 'react-native';
 import Screen from './app/components/Screen';
-import AppTextInput from './app/components/TextInput';
-import AppPicker from './app/components/Picker';
-import LoginScreen from './app/screens/LoginScreen';
-import RegisterScreen from './app/screens/RegisterScreen';
-import ListingEditScreen from './app/screens/ListingEditScreen';
-import Icon from './app/components/Icon';
-
-const categories = [
-  { label: "Furniture", value: 1 },
-  { label: "Clothing", value: 2 },
-  { label: "Cameras", value: 3 }
-];
 
 export default function App() {
 
-  const [category, setCategory] = useState();
+  const requestPermission = async () => {
+    const { granted } = await ImagePicker.requestCameraRollPermissionsAsync();
+    if (!granted) alert('You need to enable permission to access the library');
+  }
+
+  useEffect(() => {
+    requestPermission();
+  }, []);
 
   return (
-    <ListingEditScreen />
+    <Screen></Screen>
   )
 }
