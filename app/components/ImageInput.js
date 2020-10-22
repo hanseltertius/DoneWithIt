@@ -16,31 +16,34 @@ function ImageInput({ imageUri, onChangeImage }) {
         if (!granted) alert('You need to enable permission to access the library');
     }
 
+    const handlePress = async () => {
+        if (!imageUri) selectImage();
+        else Alert.alert("Delete", "Are you sure you want to delete this image?", [
+            { text: "Yes", onPress: () => onChangeImage(null) },
+            { text: "No" }
+        ])
+    }
+
     const selectImage = async () => {
         try {
-            const result = await ImagePicker.launchImageLibraryAsync();
+            const result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                quality: 0.5
+            });
             if (!result.cancelled) onChangeImage(result.uri);
         } catch (error) {
             console.log("Error reading an Image", error);
         }
     }
 
-    const handlePress = async () => {
-        if (!imageUri) selectImage();
-        else Alert.alert("Delete", "Are you sure you want to delete this image?", [
-            { text: "Yes", onPress: () => onChangeImage(imageUri) },
-            { text: "No", onPress: () => { } }
-        ])
-
-    }
-
     return (
         <TouchableWithoutFeedback onPress={handlePress}>
             <View style={styles.container}>
-                {imageUri ? <Image source={{ uri: imageUri }} style={styles.image} /> :
-                    <MaterialCommunityIcons name='camera' size={40} color={defaultStyles.colors.medium} />}
+                {!imageUri && (
+                    <MaterialCommunityIcons color={defaultStyles.colors.medium} name='camera' size={40} />
+                )}
+                {imageUri && <Image source={{ uri: imageUri }} style={styles.image} />}
             </View>
-
         </TouchableWithoutFeedback>
 
 
@@ -49,17 +52,17 @@ function ImageInput({ imageUri, onChangeImage }) {
 
 const styles = StyleSheet.create({
     container: {
-        width: 80,
-        height: 80,
-        justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: defaultStyles.colors.light,
         borderRadius: 15,
-        backgroundColor: defaultStyles.colors.light
+        height: 100,
+        justifyContent: 'center',
+        overflow: 'hidden',
+        width: 100,
     },
     image: {
-        width: 80,
-        height: 80,
-        borderRadius: 15,
+        width: "100%",
+        height: "100%",
     }
 });
 

@@ -12,9 +12,10 @@ import {
     SubmitButton
 } from '../components/form';
 import Screen from '../components/Screen';
+import useLocation from '../hooks/useLocation';
 
 const validationSchema = Yup.object().shape({
-    images: Yup.array().required().label("Images"),
+    images: Yup.array().min(1, "Please select at least one image"),
     title: Yup.string().required().min(1).label("Title"),
     price: Yup.number().required().min(1).max(10000).label("Price"),
     category: Yup.object().required().nullable().label("Category"),
@@ -36,26 +37,20 @@ const categories = [
 
 function ListingEditScreen(props) {
 
-    const [location, setLocation] = useState();
-
-    const requestPermission = async () => {
-        const { granted } = await Location.requestPermissionsAsync();
-        if (granted) {
-            const location = await Location.getCurrentPositionAsync();
-            setLocation(location);
-        }
-    }
-
-    useEffect(() => {
-        requestPermission();
-    }, []);
+    const location = useLocation();
 
     return (
         <Screen style={styles.container}>
 
             <Form
-                initialValues={{ images: [], title: '', price: '', category: null, description: '' }}
-                onSubmit={values => console.log(values)}
+                initialValues={{
+                    images: [],
+                    title: '',
+                    price: '',
+                    category: null,
+                    description: ''
+                }}
+                onSubmit={values => console.log(location)}
                 validationSchema={validationSchema}>
 
                 <FormImagePicker name="images" />
