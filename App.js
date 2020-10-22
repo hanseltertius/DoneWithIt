@@ -32,22 +32,13 @@ const TweetDetails = ({ route }) => (
 const Stack = createStackNavigator();
 
 const StackNavigator = () => (
-  <Stack.Navigator
-    screenOptions={{
-      headerStyle: { backgroundColor: "dodgerblue" },
-      headerTintColor: "white",
-    }}>
+  <Stack.Navigator>
     <Stack.Screen
       name="Tweets"
-      component={Tweets}
-      options={{
-        headerStyle: { backgroundColor: "tomato" },
-        headerTintColor: "white",
-      }} />
+      component={Tweets} />
     <Stack.Screen
       name="TweetDetails"
-      component={TweetDetails}
-      options={({ route }) => ({ title: route.params.id })} />
+      component={TweetDetails} />
   </Stack.Navigator>
 );
 
@@ -55,21 +46,10 @@ const Account = () => <Screen><Text>Account</Text></Screen>
 
 const Tab = createBottomTabNavigator();
 const TabNavigator = () => (
-  <Tab.Navigator
-    tabBarOptions={{
-      activeBackgroundColor: 'tomato',
-      activeTintColor: 'white',
-      inactiveBackgroundColor: '#eee',
-      inactiveTintColor: 'black',
-    }}>
+  <Tab.Navigator>
     <Tab.Screen
       name="Feed"
-      component={Tweets}
-      options={{
-        tabBarIcon: ({ size, color }) => (
-          <MaterialCommunityIcons name="home" size={size} color={color} />
-        )
-      }} />
+      component={StackNavigator} />
     <Tab.Screen name="Account" component={Account} />
   </Tab.Navigator>
 )
