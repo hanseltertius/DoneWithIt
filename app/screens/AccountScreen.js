@@ -5,8 +5,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Screen from '../components/Screen';
 import Icon from '../components/Icon';
 import { ListItem, ListItemSeparator } from '../components/lists';
-
 import colors from '../config/colors';
+import routes from '../navigation/routes';
 
 const menuItems = [
     {
@@ -15,7 +15,7 @@ const menuItems = [
             name: "format-list-bulleted",
             backgroundColor: colors.primary
         },
-        name: "Listings"
+        targetScreen: routes.LISTINGS
     },
     {
         title: "My Messages",
@@ -23,11 +23,11 @@ const menuItems = [
             name: "email",
             backgroundColor: colors.secondary
         },
-        name: "Messages"
+        targetScreen: routes.MESSAGES
     }
 ];
 
-function MyAccountScreen({ navigation }) {
+function AccountScreen({ navigation }) {
 
     return (
         <Screen style={styles.screen} >
@@ -54,7 +54,7 @@ function MyAccountScreen({ navigation }) {
                                     backgroundColor={item.icon.backgroundColor}
                                 />
                             }
-                            onPress={() => navigation.navigate(item.name)}
+                            onPress={() => navigation.navigate(item.targetScreen)}
                         />
                     }
                 />
@@ -78,4 +78,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default MyAccountScreen;
+export default AccountScreen;

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import defaultStyles from '../config/styles';
+import colors from '../config/colors';
 
 function NewListingButton({ onPress }) {
     return (
@@ -10,22 +10,25 @@ function NewListingButton({ onPress }) {
             <View style={styles.container}>
                 <MaterialCommunityIcons
                     name="plus-circle"
-                    size={32}
-                    color="#FFF" />
+                    color={colors.white}
+                    size={40} />
             </View>
         </TouchableOpacity>
+
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        backgroundColor: defaultStyles.colors.primary,
-        borderRadius: 24,
-        height: 48,
+        backgroundColor: colors.primary,
+        borderColor: colors.white,
+        borderRadius: 40,
+        borderWidth: 10,
+        bottom: 20,
+        height: 80,
         justifyContent: 'center',
-        width: 48,
-        bottom: 10
+        width: 80
     }
 });
 
