@@ -14,18 +14,20 @@ const menuItems = [
         icon: {
             name: "format-list-bulleted",
             backgroundColor: colors.primary
-        }
+        },
+        name: "Listings"
     },
     {
         title: "My Messages",
         icon: {
             name: "email",
             backgroundColor: colors.secondary
-        }
+        },
+        name: "Messages"
     }
 ];
 
-function MyAccountScreen(props) {
+function MyAccountScreen({ navigation }) {
 
     return (
         <Screen style={styles.screen} >
@@ -52,6 +54,7 @@ function MyAccountScreen(props) {
                                     backgroundColor={item.icon.backgroundColor}
                                 />
                             }
+                            onPress={() => navigation.navigate(item.name)}
                         />
                     }
                 />
