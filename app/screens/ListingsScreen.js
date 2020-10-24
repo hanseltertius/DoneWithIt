@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 
+import ActivityIndicator from '../components/ActivityIndicator';
+import AppText from '../components/Text';
+import AppButton from '../components/Button';
 import Card from '../components/Card';
 import colors from '../config/colors';
 import listingsApi from '../api/listings';
 import routes from '../navigation/routes';
 import Screen from '../components/Screen';
-import AppText from '../components/Text';
-import AppButton from '../components/Button';
 
 function ListingsScreen({ navigation }) {
 
@@ -39,7 +40,8 @@ function ListingsScreen({ navigation }) {
                     <AppButton title="Retry" onPress={loadListings} />
                 </>
             )}
-            <ActivityIndicator animating={true} size='large' color='#000000' />
+
+            <ActivityIndicator visible={loading} />
             <FlatList
                 data={listings}
                 keyExtractor={listing => listing.id.toString()}
