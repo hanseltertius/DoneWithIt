@@ -4,11 +4,11 @@ import { Image, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
 import colors from '../config/colors';
 import AppText from './Text';
 
-function Card({ title, subTitle, image, onPress }) {
+function Card({ title, subTitle, imageUrl, onPress }) {
     return (
         <TouchableWithoutFeedback onPress={onPress}>
             <View style={styles.card}>
-                <Image source={image} style={styles.image} />
+                <Image source={{ uri: imageUrl }} style={styles.image} />
                 <View style={styles.detailsContainer}>
                     <AppText style={styles.title} numberOfLines={1}>{title}</AppText>
                     <AppText style={styles.subTitle} numberOfLines={2}>{subTitle}</AppText>
