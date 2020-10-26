@@ -17,6 +17,7 @@ import useLocation from '../hooks/useLocation';
 import useApi from '../hooks/useApi';
 import AppText from '../components/Text';
 import UploadScreen from './UploadScreen';
+import listings from '../api/listings';
 
 const validationSchema = Yup.object().shape({
     images: Yup.array().min(1, "Please select at least one image"),
@@ -42,69 +43,79 @@ const categories = [
 function ListingEditScreen(props) {
 
     const location = useLocation();
-    const postListingApi = useApi(listingsApi.postListing);
 
+    const [uploadVisible, setUploadVisible] = useState(false);
     const [progress, setProgress] = useState(0);
-    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async (listing, { resetForm }) => {
+        setProgress(0);
+        setUploadVisible(true);
+        const result = await listingsApi.addListing(
+            { ...listing, location },
+            (progress) => setProgress(progress)
+        );
+
+        if (!result.ok) {
+            setUploadVisible(false);
+            return alert('Could not save the listing.');
+        }
+
+        resetForm();
+    }
 
     return (
         <Screen style={styles.container}>
-            <>
-                <Form
-                    initialValues={{
-                        images: [],
-                        title: '',
-                        price: '',
-                        category: null,
-                        description: ''
-                    }}
-                    onSubmit={async (values, { resetForm }) => {
-                        setLoading(true);
-                        await postListingApi.request(values, location, progressEvent => {
-                            console.log('progress', progressEvent.loaded / progressEvent.total)
-                            setProgress(progressEvent.loaded / progressEvent.total)
-                        });
-                        resetForm();
-                    }}
-                    validationSchema={validationSchema}>
 
-                    <FormImagePicker name="images" />
+            <UploadScreen
+                onDone={() => setUploadVisible(false)}
+                visible={uploadVisible}
+                progress={progress}
+            />
 
-                    <FormField
-                        maxLength={255}
-                        name="title"
-                        placeholder="Title" />
+            <Form
+                initialValues={{
+                    images: [],
+                    title: '',
+                    price: '',
+                    category: null,
+                    description: ''
+                }}
+                onSubmit={handleSubmit}
+                validationSchema={validationSchema}>
 
-                    <FormField
-                        maxLength={8}
-                        name="price"
-                        keyboardType="numeric"
-                        placeholder="Price"
-                        width={120} />
+                <FormImagePicker name="images" />
 
-                    <Picker
-                        items={categories}
-                        name="category"
-                        numberOfColumns={3}
-                        PickerItemComponent={CategoryPickerItem}
-                        placeholder="Category"
-                        width="50%" />
+                <FormField
+                    maxLength={255}
+                    name="title"
+                    placeholder="Title" />
 
-                    <FormField
-                        maxLength={255}
-                        multiline
-                        name="description"
-                        numberOfLines={3}
-                        placeholder="Description" />
+                <FormField
+                    maxLength={8}
+                    name="price"
+                    keyboardType="numeric"
+                    placeholder="Price"
+                    width={120} />
 
-                    <SubmitButton title="Post" />
-                </Form>
+                <Picker
+                    items={categories}
+                    name="category"
+                    numberOfColumns={3}
+                    PickerItemComponent={CategoryPickerItem}
+                    placeholder="Category"
+                    width="50%" />
 
-                <UploadScreen
-                    loading={loading}
-                    progress={progress}
-                    onDone={() => setLoading(false)} />
-            </>
+                <FormField
+                    maxLength={255}
+                    multiline
+                    name="description"
+                    numberOfLines={3}
+                    placeholder="Description" />
+
+                <SubmitButton title="Post" />
+            </Form>
+
+
 
         </Screen>
     );
