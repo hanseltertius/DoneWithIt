@@ -29,7 +29,10 @@ function ListingsScreen({ navigation }) {
                 </>
             )}
 
-            <ActivityIndicator visible={getListingsApi.loading} />
+            <ActivityIndicator
+                visible={getListingsApi.loading}
+                source={require('../assets/animations/loader.json')} />
+
             <FlatList
                 data={getListingsApi.data}
                 keyExtractor={listing => listing.id.toString()}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { Modal, StyleSheet } from 'react-native';
 import * as Yup from 'yup';
 import * as Location from 'expo-location';
 
@@ -11,8 +11,12 @@ import {
     AppFormImagePicker as FormImagePicker,
     SubmitButton
 } from '../components/form';
+import listingsApi from '../api/listings';
 import Screen from '../components/Screen';
 import useLocation from '../hooks/useLocation';
+import useApi from '../hooks/useApi';
+import AppText from '../components/Text';
+import UploadScreen from './UploadScreen';
 
 const validationSchema = Yup.object().shape({
     images: Yup.array().min(1, "Please select at least one image"),
@@ -38,52 +42,70 @@ const categories = [
 function ListingEditScreen(props) {
 
     const location = useLocation();
+    const postListingApi = useApi(listingsApi.postListing);
+
+    const [progress, setProgress] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     return (
         <Screen style={styles.container}>
+            <>
+                <Form
+                    initialValues={{
+                        images: [],
+                        title: '',
+                        price: '',
+                        category: null,
+                        description: ''
+                    }}
+                    onSubmit={async (values, { resetForm }) => {
+                        setLoading(true);
+                        await postListingApi.request(values, location, progressEvent => {
+                            console.log('progress', progressEvent.loaded / progressEvent.total)
+                            setProgress(progressEvent.loaded / progressEvent.total)
+                        });
+                        resetForm();
+                    }}
+                    validationSchema={validationSchema}>
 
-            <Form
-                initialValues={{
-                    images: [],
-                    title: '',
-                    price: '',
-                    category: null,
-                    description: ''
-                }}
-                onSubmit={values => console.log(location)}
-                validationSchema={validationSchema}>
+                    <FormImagePicker name="images" />
 
-                <FormImagePicker name="images" />
+                    <FormField
+                        maxLength={255}
+                        name="title"
+                        placeholder="Title" />
 
-                <FormField
-                    maxLength={255}
-                    name="title"
-                    placeholder="Title" />
+                    <FormField
+                        maxLength={8}
+                        name="price"
+                        keyboardType="numeric"
+                        placeholder="Price"
+                        width={120} />
 
-                <FormField
-                    maxLength={8}
-                    name="price"
-                    keyboardType="numeric"
-                    placeholder="Price"
-                    width={120} />
+                    <Picker
+                        items={categories}
+                        name="category"
+                        numberOfColumns={3}
+                        PickerItemComponent={CategoryPickerItem}
+                        placeholder="Category"
+                        width="50%" />
 
-                <Picker
-                    items={categories}
-                    name="category"
-                    numberOfColumns={3}
-                    PickerItemComponent={CategoryPickerItem}
-                    placeholder="Category"
-                    width="50%" />
+                    <FormField
+                        maxLength={255}
+                        multiline
+                        name="description"
+                        numberOfLines={3}
+                        placeholder="Description" />
 
-                <FormField
-                    maxLength={255}
-                    multiline
-                    name="description"
-                    numberOfLines={3}
-                    placeholder="Description" />
+                    <SubmitButton title="Post" />
+                </Form>
 
-                <SubmitButton title="Post" />
-            </Form>
+                <UploadScreen
+                    loading={loading}
+                    progress={progress}
+                    onDone={() => setLoading(false)} />
+            </>
+
         </Screen>
     );
 }
