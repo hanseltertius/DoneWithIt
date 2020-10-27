@@ -24,7 +24,11 @@ export default function App() {
 
   demo();
 
-  return null;
+
+
+  const netInfo = useNetInfo();
+
+  return <Button title="Test" disabled={!netInfo.isInternetReachable} onPress={() => console.log("We connected to internet")} />;
 
 }
 
