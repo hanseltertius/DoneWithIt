@@ -10,25 +10,11 @@ import navigationTheme from './app/navigation/navigationTheme';
 
 export default function App() {
 
-  const demo = async () => {
-    try {
-      await AsyncStorage.setItem('person', JSON.stringify({ id: 1 }));
-      const value = await AsyncStorage.getItem('person');
-      const person = JSON.parse(value);
-
-      console.log(person);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  demo();
-
-
-
-  const netInfo = useNetInfo();
-
-  return <Button title="Test" disabled={!netInfo.isInternetReachable} onPress={() => console.log("We connected to internet")} />;
+  return (
+    <NavigationContainer theme={navigationTheme}>
+      <AppNavigator />
+    </NavigationContainer>
+  );
 
 }
 
