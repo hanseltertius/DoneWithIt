@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet } from 'react-native';
 import * as Yup from 'yup';
+import jwtDecode from 'jwt-decode';
 
 import Screen from '../components/Screen';
 import { ErrorMessage, AppForm, AppFormField, SubmitButton } from '../components/form';
@@ -19,7 +20,8 @@ function LoginScreen(props) {
         const result = await authApi.login(email, password);
         if (!result.ok) return setLoginFailed(true);
         setLoginFailed(false);
-        console.log(result.data);
+        const user = jwtDecode(result.data);
+        console.log(user);
     }
 
     return (
