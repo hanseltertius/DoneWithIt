@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -7,6 +7,7 @@ import Icon from '../components/Icon';
 import { ListItem, ListItemSeparator } from '../components/lists';
 import colors from '../config/colors';
 import routes from '../navigation/routes';
+import AuthContext from '../auth/context';
 
 const menuItems = [
     {
@@ -29,13 +30,15 @@ const menuItems = [
 
 function AccountScreen({ navigation }) {
 
+    const { user } = useContext(AuthContext);
+
     return (
         <Screen style={styles.screen} >
 
             <View style={styles.container}>
                 <ListItem
-                    title="Mosh Hamedani"
-                    subTitle="programmingwithmosh@gmail.com"
+                    title={user.name}
+                    subTitle={user.email}
                     image={require('../assets/mosh.jpg')}
                 />
             </View>
