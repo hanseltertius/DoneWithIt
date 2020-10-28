@@ -3,7 +3,7 @@ import { StyleSheet, View, ImageBackground, Text, Image } from 'react-native';
 
 import AppButton from '../components/Button';
 import colors from '../config/colors';
-import routes from './routes';
+import routes from '../navigation/routes';
 
 export default function WelcomeScreen({ navigation }) {
     return (
