@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Platform } from 'react-native';
+import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import * as Notifications from 'expo-notifications';
-import * as Permissions from 'expo-permissions';
 
 import AccountNavigator from './AccountNavigator';
-import expoPushTokensApi from '../api/expoPushTokens';
 import ListingEditScreen from '../screens/ListingEditScreen';
 import FeedNavigator from './FeedNavigator';
 import NewListingButton from './NewListingButton';
 import routes from './routes';
 import navigation from './rootNavigation';
+import useNotifications from '../hooks/useNotifications';
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
+
+    useNotifications();
 
     useEffect(() => {
         registerForPushNotifications();
