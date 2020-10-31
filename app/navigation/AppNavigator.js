@@ -25,7 +25,7 @@ const AppNavigator = () => {
             const permissions = await Permissions.askAsync(Permissions.NOTIFICATIONS);
             if (!permissions.granted) return;
 
-            const token = Notifications.getExpoPushTokenAsync();
+            const token = await Notifications.getExpoPushTokenAsync();
             expoPushTokensApi.register(token);
         } catch (error) {
             console.log('Error getting a push token', error);
