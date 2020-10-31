@@ -17,6 +17,10 @@ const AppNavigator = () => {
 
     useEffect(() => {
         registerForPushNotifications();
+
+        Notifications.addNotificationReceivedListener((notification) => console.log(notification));
+
+        Notifications.addNotificationResponseReceivedListener(response => console.log(response));
     }, []);
 
     const registerForPushNotifications = async () => {
