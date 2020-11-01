@@ -16,30 +16,6 @@ const AppNavigator = () => {
 
     useNotifications();
 
-    useEffect(() => {
-        registerForPushNotifications();
-
-        Notifications.addNotificationReceivedListener((notification) => {
-            navigation.navigate(routes.ACCOUNT);
-        });
-
-        Notifications.addNotificationResponseReceivedListener(response => console.log(response));
-    }, []);
-
-    const registerForPushNotifications = async () => {
-
-        try {
-            const permissions = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-            if (!permissions.granted) return;
-
-            const token = (await Notifications.getExpoPushTokenAsync()).data;
-            expoPushTokensApi.register(token);
-
-        } catch (error) {
-            console.log('Error getting a push token', error);
-        }
-    }
-
     return (
         <Tab.Navigator>
             <Tab.Screen
