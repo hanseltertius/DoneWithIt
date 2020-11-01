@@ -1,7 +1,7 @@
 import client from './client';
 
-const contactSeller = (messageInfo) => client.post('/messages', messageInfo);
+const send = (message, listingId) => client.post('/messages', { message, listingId });
 
 export default {
-    contactSeller
+    send
 }

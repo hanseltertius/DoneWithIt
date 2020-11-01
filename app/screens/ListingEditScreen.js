@@ -5,10 +5,10 @@ import * as Location from 'expo-location';
 
 import CategoryPickerItem from '../components/CategoryPickerItem';
 import {
-    AppForm as Form,
-    AppFormField as FormField,
-    AppFormPicker as Picker,
-    AppFormImagePicker as FormImagePicker,
+    Form as Form,
+    FormField as FormField,
+    FormPicker as Picker,
+    FormImagePicker as FormImagePicker,
     SubmitButton
 } from '../components/form';
 import listingsApi from '../api/listings';

@@ -3,7 +3,7 @@ import { Image, StyleSheet } from 'react-native';
 import * as Yup from 'yup';
 
 import Screen from '../components/Screen';
-import { ErrorMessage, AppForm, AppFormField, SubmitButton } from '../components/form';
+import { ErrorMessage, Form, FormField, SubmitButton } from '../components/form';
 import authApi from '../api/auth';
 import useAuth from '../auth/useAuth';
 
@@ -32,13 +32,13 @@ function LoginScreen(props) {
                 source={require("../assets/logo-red.png")}
             />
 
-            <AppForm
+            <Form
                 initialValues={{ email: '', password: '' }}
                 onSubmit={handleSubmit}
                 validationSchema={validationSchema}>
 
                 <ErrorMessage error="Invalid email and/or password." visible={loginFailed} />
-                <AppFormField
+                <FormField
                     autoCapitalize="none"
                     autoCorrect={false}
                     icon="email"
@@ -48,7 +48,7 @@ function LoginScreen(props) {
                     textContentType="emailAddress"
                 />
 
-                <AppFormField
+                <FormField
                     autoCapitalize="none"
                     autoCorrect={false}
                     icon="lock"
@@ -59,7 +59,7 @@ function LoginScreen(props) {
                 />
 
                 <SubmitButton title="Login" />
-            </AppForm>
+            </Form>
 
         </Screen>
     );
