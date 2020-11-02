@@ -14,6 +14,7 @@ import Screen from '../components/Screen';
 import useAuth from '../auth/useAuth';
 import useApi from '../hooks/useApi';
 import ActivityIndicator from '../components/ActivityIndicator';
+import logger from '../utility/logger';
 
 const validationSchema = Yup.object().shape({
     name: Yup.string().required().matches(/^[A-Za-z]+$/, 'Must only contain letters').label("Name"),
@@ -38,7 +39,7 @@ function RegisterScreen(props) {
             } else {
                 setRegisterFailed(true);
                 setError("An unexpected error occured.");
-                console.log(result);
+                logger.log(result);
             }
             return;
         }

@@ -10,6 +10,19 @@
       "resizeMode": "cover",
       "backgroundColor": "#e63c4b"
     },
+    "extra" : {
+      "bugsnag" : {
+        "apiKey" : "6308d8d333910c2a86405778c9de4f09"
+      }
+    },
+    "hooks" : {
+      "postPublish" : [
+        {
+          "file" : "@bugsnag/expo/hooks/post-publish.js",
+          "config" : {}
+        }
+      ]
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },

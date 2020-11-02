@@ -1,6 +1,8 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import dayjs from 'dayjs';
 
+import logger from './logger';
+
 const prefix = 'cache';
 const expiryInMinutes = 5;
 
@@ -13,7 +15,7 @@ const store = async (key, value) => {
 
         await AsyncStorage.setItem(prefix + key, JSON.stringify(item));
     } catch (error) {
-        console.log(error);
+        logger.log(error);
     }
 }
 
