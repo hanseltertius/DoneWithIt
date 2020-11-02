@@ -33,7 +33,9 @@
       "useNextNotificationsApi": true
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier" : "com.hanseltertius.donewithit",
+      "buildNumber" : "1.0.0"
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
