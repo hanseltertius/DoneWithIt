@@ -30,7 +30,9 @@
       "**/*"
     ],
     "android" : {
-      "useNextNotificationsApi": true
+      "useNextNotificationsApi": true,
+      "package" : "com.hanseltertius.donewithit",
+      "versionCode" : 1
     },
     "ios": {
       "supportsTablet": true,
